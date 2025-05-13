@@ -33,8 +33,6 @@ if (session_status() == PHP_SESSION_NONE) {
 
     <?php
     include('koneksi.php');
-
-    // Ganti 'table_mahasiswa' sesuai dengan nama tabel yang benar
     $sql = "SELECT * FROM data_mahasiswa"; 
     $result = $conn->query($sql);
 
