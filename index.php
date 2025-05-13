@@ -21,7 +21,6 @@ if($check->get_result()->num_rows > 0) {
 } else {
 
     $stmt = $conn->prepare("INSERT INTO data_mahasiswa (...) VALUES (...)");
-    // ... lanjutkan proses insert
 }
 }
 ?>
@@ -47,7 +46,7 @@ if($check->get_result()->num_rows > 0) {
         
         .container-wrapper {
             flex: 1;
-            padding-bottom: 60px; /* Space for footer */
+            padding-bottom: 60px;
         }
         
         footer {
@@ -144,14 +143,14 @@ if($check->get_result()->num_rows > 0) {
                 if (file_exists('readdos.php')) {
                     include 'readdos.php';
                 } else {
-                    echo "Halaman dosen tidak ditemukan.";
+                    echo "Halaman tidak ditemukan.";
                 }
                 break;
             case 'data_mahasiswa':
                 if (file_exists('read.php')) {                
                     include 'read.php';
                 } else {
-                    echo "Halaman data mahasiswa tidak ditemukan.";
+                    echo "Halaman tidak ditemukan.";
                 }
                 break;
             case 'login':
@@ -165,14 +164,14 @@ if($check->get_result()->num_rows > 0) {
                 if (file_exists('edit.php')) {
                     include 'index.php';
                 } else {
-                    echo "Halaman edit tidak ditemukan.";
+                    echo "Halaman tidak ditemukan.";
                 }
                 break;
             case 'updatedos':
                 if (file_exists('updatedos.php')) {
                     include 'updatedos.php';
                 } else {
-                    echo "Halaman login tidak ditemukan.";
+                    echo "Halaman tidak ditemukan.";
                 }
                 break;
             case 'regis':
@@ -193,21 +192,21 @@ if($check->get_result()->num_rows > 0) {
                 if (file_exists('deletedos.php')) {
                     include 'deletedos.php';
                 } else {
-                    echo "Halaman form dosen tidak ditemukan.";
+                    echo "Halaman tidak ditemukan.";
                 }
                 break;
             case 'editdos':
                 if (file_exists('editdos.php')) {
                     include 'editdos.php';
                 } else {
-                    echo "Halaman form dosen tidak ditemukan.";
+                    echo "Halaman tidak ditemukan.";
                 }
                 break;
             case 'daftar':
                 if (file_exists('daftar.php')) {
                     include 'daftar.php';
                 } else {
-                    echo "Halaman form dosen tidak ditemukan.";
+                    echo "Halaman tidak ditemukan.";
                 }
                 break;
             case 'home':
@@ -228,7 +227,6 @@ if($check->get_result()->num_rows > 0) {
     &copy; <?= date('Y') ?> - Sistem Akademik
 </footer>
 
-<!-- Bootstrap JS -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
