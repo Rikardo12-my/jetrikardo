@@ -1,7 +1,6 @@
 <?php
 include("koneksi.php");
 
-// Ambil data dosen berdasarkan nidn
 if(isset($_GET['nidn'])) {
     $nidn = $_GET['nidn'];
     $stmt = $conn->prepare("SELECT * FROM dosen WHERE nidn = ?");
@@ -24,7 +23,6 @@ if(isset($_GET['nidn'])) {
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <title>Edit Data Dosen</title>
     <style>
-        /* CSS untuk field readonly */
         .readonly-field {
             background-color: #e9ecef;
             opacity: 1;
