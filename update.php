@@ -7,7 +7,6 @@ include('koneksi.php');
 
 $folder = "foto/";
 
-// Ambil data dari form
 $original_nim = $_POST['original_nim'] ?? null; // Untuk edit
 $nim = $_POST['nim'];
 $nama = $_POST['nama'];
@@ -15,12 +14,10 @@ $gender = $_POST['gender'];
 $email = $_POST['email'];
 $ponsel = $_POST['ponsel'];
 
-// Validasi input
 if(empty($nim) || empty($nama)) {
     die("NIM dan Nama wajib diisi");
 }
 
-// Handle upload foto
 $foto = null;
 if(isset($_FILES['foto']) && $_FILES['foto']['error'] === UPLOAD_ERR_OK) {
     $file_name = uniqid().'_'.basename($_FILES['foto']['name']);
@@ -29,7 +26,6 @@ if(isset($_FILES['foto']) && $_FILES['foto']['error'] === UPLOAD_ERR_OK) {
     if(move_uploaded_file($_FILES['foto']['tmp_name'], $target)) {
         $foto = $file_name;
         
-        // Hapus foto lama jika edit
         if($original_nim) {
             $old = $conn->prepare("SELECT foto FROM data_mahasiswa WHERE nim = ?");
             $old->bind_param("s", $original_nim);
@@ -42,11 +38,8 @@ if(isset($_FILES['foto']) && $_FILES['foto']['error'] === UPLOAD_ERR_OK) {
     }
 }
 
-// Jika ini operasi edit (ada original_nim)
 if($original_nim) {
-    // Jika NIM diubah ke nilai yang berbeda
     if($original_nim != $nim) {
-        // Cek apakah NIM baru sudah digunakan oleh data lain
         $check = $conn->prepare("SELECT nim FROM data_mahasiswa WHERE nim = ? AND nim != ?");
         $check->bind_param("ss", $nim, $original_nim);
         $check->execute();
@@ -55,7 +48,6 @@ if($original_nim) {
         }
     }
     
-    // Query UPDATE (baik NIM diubah atau tidak)
     $sql = "UPDATE data_mahasiswa SET 
             nim = ?, 
             nama = ?, 
@@ -81,7 +73,6 @@ if($original_nim) {
         die("Error: NIM sudah terdaftar");
     }
     
-    // Query INSERT
     $sql = "INSERT INTO data_mahasiswa (nim, nama, gender, email, ponsel".
            ($foto ? ", foto" : "").") 
            VALUES (?, ?, ?, ?, ?".
@@ -95,7 +86,6 @@ if($original_nim) {
     }
 }
 
-// Eksekusi query
 if($stmt->execute()) {
     header("Location: index.php?page=data_mahasiswa&success=1");
 } else {
