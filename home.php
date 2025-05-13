@@ -9,22 +9,22 @@
   <style>
     .card {
     display: inline-block;
-    width: 30%; /* Atur sesuai kebutuhan */
+    width: 30%; 
     margin: 10px;
 }
 
 .card img {
-    width: 100%; /* Membuat gambar memenuhi lebar card */
-    height: 200px; /* Bisa disesuaikan untuk mendapatkan tinggi yang sama */
-    object-fit: cover; /* Memastikan gambar terpotong dengan baik */
+    width: 100%;
+    height: 200px; 
+    object-fit: cover; 
 }
 
 h3, p {
-    text-align: center; /* Menyelaraskan teks */
+    text-align: center;
 }
 @media (max-width: 768px) {
     .card {
-        width: 100%; /* Membuat card penuh pada perangkat kecil */
+        width: 100%;
     }
 }
 
@@ -71,8 +71,6 @@ h3, p {
                 <span class="visually-hidden">Next</span>
             </button>
           </div>
-          <!-- end of carousel images -->
-
           
           </div>
       <div class="mt-4">
