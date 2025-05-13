@@ -3,7 +3,7 @@ include("koneksi.php");
 
 $nim = $_GET['nim'] ?? die("NIM tidak valid");
 
-// Ambil data yang akan diedit
+
 $stmt = $conn->prepare("SELECT * FROM data_mahasiswa WHERE nim = ?");
 $stmt->bind_param("s", $nim);
 $stmt->execute();
