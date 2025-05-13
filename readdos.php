@@ -6,15 +6,13 @@
     <title>From Data Dosen</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <style>
-           /* Reduce margin or padding of the header */
    header {
-       margin-bottom: 10px; /* Adjust as necessary */
-       padding: 5px; /* Adjust as necessary */
+       margin-bottom: 10px;
+       padding: 5px; 
    }
 
-   /* Adjust table margin */
    table {
-       margin-top: 0; /* Set to zero or a small value */
+       margin-top: 0;
    }
    
     </style>
@@ -27,7 +25,6 @@ if (session_status() == PHP_SESSION_NONE) {
 }
 ?>
     
-   
     <div class="w-100 bg-secondary text-white py-4 text-center">
         <h1 class="mb-n3 fw-bold fst-italic">Daftar Data Dosen</h1>
     </div>
@@ -94,7 +91,6 @@ if (session_status() == PHP_SESSION_NONE) {
   .then(response => response.json())
   .then(data => {
     if (data.success) {
-      // Perbarui tabel data mahasiswa
       loadDataMahasiswa();
     } else {
       alert('Gagal menambah data! ' + data.message);
