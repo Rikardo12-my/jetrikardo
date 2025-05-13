@@ -7,7 +7,7 @@ include('koneksi.php');
 
 $folder = "foto/";
 
-// Ambil data dari form
+
 $original_nidn = $_POST['original_nidn'] ?? null; // Untuk edit
 $nidn = $_POST['nidn'];
 $nama = $_POST['nama'];
@@ -16,16 +16,13 @@ $gender = $_POST['gender'];
 $email = $_POST['email'];
 $telpon = $_POST['telpon'];
 
-// Validasi input wajib
 if(empty($nidn) || empty($nama)) {
     die("NIDN dan Nama wajib diisi.");
 }
 
-// Cek apakah ini edit atau tambah data
 if($original_nidn) {
-    // === EDIT DATA DOSEN ===
-    
-    // Jika NIDN diubah, cek apakah sudah dipakai
+
+  
     if($original_nidn != $nidn) {
         $check = $conn->prepare("SELECT nidn FROM dosen WHERE nidn = ?");
         $check->bind_param("s", $nidn);
@@ -35,7 +32,6 @@ if($original_nidn) {
         }
     }
 
-    // Cek apakah ada foto baru
     $foto = null;
     if(isset($_FILES['foto']) && $_FILES['foto']['error'] === UPLOAD_ERR_OK) {
         $file_name = uniqid().'_'.basename($_FILES['foto']['name']);
@@ -44,7 +40,6 @@ if($original_nidn) {
         if(move_uploaded_file($_FILES['foto']['tmp_name'], $target)) {
             $foto = $file_name;
 
-            // Hapus foto lama
             $getOld = $conn->prepare("SELECT foto FROM dosen WHERE nidn = ?");
             $getOld->bind_param("s", $original_nidn);
             $getOld->execute();
@@ -55,7 +50,6 @@ if($original_nidn) {
         }
     }
 
-    // Buat query update
     $sql = "UPDATE dosen SET 
             nidn = ?, 
             nama = ?, 
@@ -73,7 +67,6 @@ if($original_nidn) {
     }
 
 } else {
-    // === TAMBAH DATA BARU ===
 
     // Cek NIDN duplikat
     $check = $conn->prepare("SELECT nidn FROM dosen WHERE nidn = ?");
@@ -83,7 +76,6 @@ if($original_nidn) {
         die("Error: NIDN sudah terdaftar.");
     }
 
-    // Proses upload foto
     $foto = null;
     if(isset($_FILES['foto']) && $_FILES['foto']['error'] === UPLOAD_ERR_OK) {
         $file_name = uniqid().'_'.basename($_FILES['foto']['name']);
@@ -94,7 +86,6 @@ if($original_nidn) {
         }
     }
 
-    // Query insert
     $sql = "INSERT INTO dosen (nidn, nama, jabatan, gender, email, telpon".($foto ? ", foto" : "").")
             VALUES (?, ?, ?, ?, ?, ?".($foto ? ", ?" : "").")";
 
@@ -106,7 +97,6 @@ if($original_nidn) {
     }
 }
 
-// Eksekusi
 if($stmt->execute()) {
     header("Location: index.php?page=dosen");
     exit();
