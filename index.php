@@ -6,20 +6,20 @@ include "koneksi.php";
 $allowed_pages = ['home', 'dosen', 'data_mahasiswa', 'login', 'regis', 'formdos'];
 $page = $_GET['page'] ?? 'home';
 
-// Cegah akses ke file sembarangan
+
 if (!in_array($page, $allowed_pages)) {
     $page = 'home';
 
-    // Sebelum INSERT, cek dulu ketersediaan NIM
+
 $check = $conn->prepare("SELECT nim FROM data_mahasiswa WHERE nim = ?");
 $check->bind_param("s", $nim);
 $check->execute();
 
 if($check->get_result()->num_rows > 0) {
-    // Jika NIM sudah ada, tampilkan pesan error
+
     die("NIM sudah terdaftar. Silakan gunakan NIM lain.");
 } else {
-    // Jika NIM belum ada, lakukan INSERT
+
     $stmt = $conn->prepare("INSERT INTO data_mahasiswa (...) VALUES (...)");
     // ... lanjutkan proses insert
 }
@@ -70,11 +70,11 @@ if($check->get_result()->num_rows > 0) {
             margin-bottom: 20px;
         }
         
-        /* Fix for content being hidden behind footer */
+ 
         .main-content {
             margin-bottom: 20px;
         }
-        /* CSS untuk memampatkan tabel dosen */
+      
 .table-responsive {
     margin-top: 0 !important;
 }
@@ -88,7 +88,7 @@ if($check->get_result()->num_rows > 0) {
     padding-bottom: 0.5rem !important;
 }
 
-/* Jika menggunakan card */
+
 .card {
     margin-top: 0;
     border-top: none;
